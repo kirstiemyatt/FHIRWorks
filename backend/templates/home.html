@@ -41,13 +41,6 @@
         </div>
         <button type="submit" onclick="getData()" class="btn btn-primary">Submit</button>
     </form>
-    <table>
-        <tr>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Approved</th>
-        </tr>
-    </table>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -88,11 +81,14 @@
 
                 for (var i = 0; i < apts.length; i++) {
                     var row = table.insertRow()
-                    Object.keys(apts[i]).forEach(function (k) {
-                        console.log(k);
                         var cell = row.insertCell();
-                        cell.appendChild(document.createTextNode(apts[i][k]));
-                    })
+                        cell.appendChild(document.createTextNode(apts[i]['description']));
+                        var cell = row.insertCell();
+                        cell.appendChild(document.createTextNode(apts[i]['start']));
+                        var cell = row.insertCell();
+                        cell.appendChild(document.createTextNode(apts[i]['end']));
+                        var cell = row.insertCell();
+                        cell.appendChild(document.createTextNode(apts[i]['status']));
                 }
 
                 document.getElementById('view').appendChild(table);
