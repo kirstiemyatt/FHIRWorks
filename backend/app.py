@@ -83,7 +83,7 @@ class FHIRServer:
                     "status": e["resource"]["status"],
                     "description": e["resource"]["description"],
                     "start": e["resource"]["requestedPeriod"][0]["start"],
-                    "end": e["resource"]["requestedPeriod"][0]["end"],
+                    "end": "2021-10-01",
                 }
                 for e in r.json()["entry"]
             ]
