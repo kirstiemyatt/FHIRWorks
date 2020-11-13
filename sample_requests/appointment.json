@@ -1,22 +1,16 @@
 {
-  "resourceType": "Appointment",
-  "status": "proposed",
-  "created": "2015-12-02",
-  "comment": "Please can I book my annual leave.",
-  "participant": [
+  "appointments": [
     {
-      "actor": {
-        "reference": "Patient/123",
-        "display": "Staff member"
-      },
-      "required": "required",
-      "status": "accepted"
-    }
-  ],
-  "requestedPeriod": [
+      "status": "booked",
+      "description": "Some description",
+      "start": "2021-02-01T00:00:00+00:00",
+      "end": "2021-02-02T00:00:00+00:00"
+    },
     {
-      "start": "2020-12-20",
-      "end": "2021-01-03"
+      "status": "booked",
+      "description": "Some description",
+      "start": "2021-02-01T00:00:00+00:00",
+      "end": "2021-02-02T00:00:00+00:00"
     }
   ]
 }
