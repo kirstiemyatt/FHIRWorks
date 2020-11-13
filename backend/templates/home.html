@@ -36,7 +36,7 @@
     let toDate = document.getElementById("toDate").value;
     let staffId = document.getElementById("staffId").value;    
     
-    axios.post('/create_appointment',{
+    axios.post('/create_appointment?staff_id=' + staffId + '&start_date=' + fromDate + '&end_date' + toDate,{
       start_date: fromDate,
       end_date: toDate,
       staff_id: staffId

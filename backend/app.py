@@ -10,7 +10,11 @@ def hello_world():
 
 @app.route('/create_appointment',methods = ['POST'])
 def create_appointment():
-    print(request.method)
+    print(request.args)
+    staff_id = request.args.get('staff_id')
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
     appointment_dict = {
         "resourceType": "Appointment",
         "status": "proposed",
