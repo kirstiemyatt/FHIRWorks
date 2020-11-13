@@ -1,10 +1,5 @@
 {
   "resourceType": "Appointment",
-  "id": "examplereq",
-  "text": {
-    "status": "generated",
-    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Brian MRI results discussion</div>"
-  },
   "status": "proposed",
   "created": "2015-12-02",
   "comment": "Please can I book my annual leave.",
