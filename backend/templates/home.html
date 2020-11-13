@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+    </head>
+<body>
+    <h1 class="text-center">FHIR-WORKS HR-System</h1>
+    <div class="container">
+    <form onsubmit="return false">
+        <div class="row">
+            <div class="form-group">
+            <label for="exampleInputEmail1">From Date:</label>
+            <input type="date" class="form-control" id="fromDate" aria-describedby="emailHelp">              
+        </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="exampleInputPassword1">To Date:</label>
+            <input type="date" class="form-control" id="toDate">
+          </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Staff Id:</label>
+              <input type="input" class="form-control" id="staffId">
+            </div>
+          </div>
+          <button type="submit" onclick="submitData()" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function submitData() {
+    let fromDate = document.getElementById("fromDate").value;
+    let toDate = document.getElementById("toDate").value;
+    let staffId = document.getElementById("staffId").value;    
+    
+    axios.post('/create_appointment?staff_id=' + staffId + '&start_date=' + fromDate + '&end_date' + toDate,{
+      start_date: fromDate,
+      end_date: toDate,
+      staff_id: staffId
+      })
+        .then((response) => {
+  console.log(response);
+}, (error) => {
+  console.log(error);
+});
+}
+  </script>
+</body>
+</html>
+
+
+

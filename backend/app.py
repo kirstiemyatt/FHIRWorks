@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request
 import datetime
 import json
 import requests
@@ -7,10 +7,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hackairethon wooooo!'
+    return render_template('home.html')
 
+@app.route('/create_appointment',methods = ['POST'])
+def create_appointment():
+    print(request.args)
+    staff_id = request.args.get('staff_id')
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
 
-def create_appointment(staff_id, start_date, end_date):
     appointment_dict = {
         "resourceType": "Appointment",
         "status": "proposed",
