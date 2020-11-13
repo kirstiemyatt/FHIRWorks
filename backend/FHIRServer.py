@@ -1,5 +1,6 @@
 import requests
-from time import time
+import datetime
+import time
 
 CLIENT_ID = "4fd5577c-c9a2-4a7b-9a58-575c264254fa"
 CLIENT_SECRET = "tup3m3ipxV._-.5a3s-ZtRLJnV2702Qg9B"
@@ -31,8 +32,57 @@ class FHIRServer:
                     "grant_type": "client_credentials",
                 },
             ).json()
-        return self._token_response['access_token']
+        return self._token_response["access_token"]
 
     def Patient(self):
-        r = requests.get(f"{self.base_uri}/Patient", headers={"Authorization": f"Bearer {self._access_token()}"})
+        r = requests.get(
+            f"{self.base_uri}/Patient",
+            headers={"Authorization": f"Bearer {self._access_token()}"},
+        )
         return r.json()
+
+    def create_appointment(self, staff_id, start_date, end_date):
+        appointment = {
+            "resourceType": "Appointment",
+            "status": "proposed",
+            "description": "Please can I book my annual leave.",
+            "created": datetime.datetime.now().strftime("%Y-%m-%d"),
+            "comment": "Please can I book my annual leave.",
+            "participant": [
+                {
+                    "actor": {
+                        "reference": f"Patient/{staff_id}",
+                        "display": "Staff member",
+                    },
+                    "required": "required",
+                    "status": "accepted",
+                }
+            ],
+            "requestedPeriod": [{"start": start_date, "end": end_date}],
+        }
+
+        r = requests.post(
+            f"{self.base_uri}/Appointment",
+            json=appointment,
+            headers={"Authorization": f"Bearer {self._access_token()}"},
+        )
+        r.raise_for_status()
+
+    def get_appointments(self, staff_id):
+        r = requests.get(
+            f"{self.base_uri}/Appointment?Patient={staff_id}",
+            headers={"Authorization": f"Bearer {self._access_token()}"},
+        )
+        r.raise_for_status()
+        appointments = {
+            "appointments": [
+                {
+                    "status": e["resource"]["status"],
+                    "description": e["resource"]["description"],
+                    "start": e["resource"]["requestedPeriod"][0]["start"],
+                    "end": e["resource"]["requestedPeriod"][0]["end"],
+                }
+                for e in r.json()["entry"]
+            ]
+        }
+        return appointments
