@@ -112,6 +112,7 @@ def create_appointment():
 
     fs.create_appointment(staff_id=staff_id, start_date=start_date, end_date=end_date)
 
+    return "", 201
 
 @app.route("/appointments")
 def return_appointment():
