@@ -18,6 +18,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+node_modules/
 .Python
 build/
 develop-eggs/
@@ -37,6 +38,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.vscode
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import datetime
 import json
 app = Flask(__name__)
@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hackairethon wooooo!'
+    return render_template('home.html')
 
 
 def create_appointment(staff_id, start_date, end_date):
