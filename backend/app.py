@@ -23,13 +23,13 @@ fs = FHIRServer(
 def hello_world():
     return render_template("home.html")
 
-
 @app.route("/create_appointment", methods=["POST"])
 def create_appointment():
     print(request.args)
     staff_id = request.args.get("staff_id")
     start_date = request.args.get("start_date")
     end_date = request.args.get("end_date")
+
 
     appointment_dict = {
         "resourceType": "Appointment",
@@ -51,7 +51,10 @@ def create_appointment():
     return json.dumps(appointment_dict)
 
 
-def return_appointment(patient_id):
+@app.route("/appointments")
+def return_appointment():
+    print(request.args)
+    patient_id = request.args.get("staff_id")
     endpoint = (
         "https://fhirworks.azurehealthcareapis.com/Appointment?Patient/" + patient_id
     )
